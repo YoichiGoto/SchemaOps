@@ -1,0 +1,141 @@
+{
+  "attributes": [
+    {
+      "canonicalAttributeId": "title",
+      "labels": {
+        "ja": "商品名",
+        "en": "Title"
+      },
+      "definition": "Listing title shown on marketplaces",
+      "dataType": "string",
+      "unit": null,
+      "allowedValues": null,
+      "required": false,
+      "conditionalRule": "true",
+      "examples": null,
+      "categoryPath": "Acme Hooded Jacket",
+      "notes": "Apparel>General",
+      "version": null
+    },
+    {
+      "canonicalAttributeId": "brand",
+      "labels": {
+        "ja": "ブランド",
+        "en": "Brand"
+      },
+      "definition": "Official brand name",
+      "dataType": "string",
+      "unit": null,
+      "allowedValues": null,
+      "required": false,
+      "conditionalRule": "true",
+      "examples": null,
+      "categoryPath": "ACME",
+      "notes": "Apparel>General",
+      "version": null
+    },
+    {
+      "canonicalAttributeId": "gtin",
+      "labels": {
+        "ja": "GTIN/JAN/UPC",
+        "en": "GTIN"
+      },
+      "definition": "Global Trade Item Number (JAN/UPC/EAN)",
+      "dataType": "string",
+      "unit": null,
+      "allowedValues": null,
+      "required": false,
+      "conditionalRule": "true",
+      "examples": null,
+      "categoryPath": "4901234567890",
+      "notes": "Apparel>General",
+      "version": "Length 8-14 depends on scheme"
+    },
+    {
+      "canonicalAttributeId": "size",
+      "labels": {
+        "ja": "サイズ",
+        "en": "Size"
+      },
+      "definition": "Variant size label",
+      "dataType": "string",
+      "unit": null,
+      "allowedValues": "XS;S;M;L;XL",
+      "required": false,
+      "conditionalRule": null,
+      "examples": "M",
+      "categoryPath": "Apparel>General",
+      "notes": null,
+      "version": "v0.1"
+    },
+    {
+      "canonicalAttributeId": "color",
+      "labels": {
+        "ja": "カラー",
+        "en": "Color"
+      },
+      "definition": "Primary color",
+      "dataType": "string",
+      "unit": null,
+      "allowedValues": null,
+      "required": false,
+      "conditionalRule": "false",
+      "examples": null,
+      "categoryPath": "Black",
+      "notes": "Apparel>General",
+      "version": null
+    },
+    {
+      "canonicalAttributeId": "material",
+      "labels": {
+        "ja": "素材",
+        "en": "Material"
+      },
+      "definition": "Primary material composition",
+      "dataType": "string",
+      "unit": null,
+      "allowedValues": null,
+      "required": false,
+      "conditionalRule": "false",
+      "examples": null,
+      "categoryPath": "Polyester",
+      "notes": "Apparel>General",
+      "version": null
+    },
+    {
+      "canonicalAttributeId": "description",
+      "labels": {
+        "ja": "商品説明",
+        "en": "Description"
+      },
+      "definition": "Long description of the product",
+      "dataType": "string",
+      "unit": null,
+      "allowedValues": null,
+      "required": false,
+      "conditionalRule": "false",
+      "examples": null,
+      "categoryPath": "Lightweight waterproof jacket",
+      "notes": "Apparel>General",
+      "version": null
+    },
+    {
+      "canonicalAttributeId": "image_link",
+      "labels": {
+        "ja": "画像URL",
+        "en": "Image Link"
+      },
+      "definition": "Primary image URL",
+      "dataType": "string",
+      "unit": "url",
+      "allowedValues": null,
+      "required": true,
+      "conditionalRule": null,
+      "examples": "https://example.com/img1.jpg",
+      "categoryPath": "Apparel>General",
+      "notes": null,
+      "version": "v0.1"
+    }
+  ],
+  "exportedAt": "2025-10-23T07:54:06.492421Z"
+}

@@ -1,0 +1,9 @@
+attributeId,attributeName_ja,attributeName_en,definition,dataType,unitStandard,allowedValues,requiredFlag,conditionalRule,examples,categoryPath,notes,version
+title,商品名,Title,Listing title shown on marketplaces,string,,,true,,Acme Hooded Jacket,Apparel>General,,v0.1
+brand,ブランド,Brand,Official brand name,string,,,true,,ACME,Apparel>General,,v0.1
+gtin,GTIN/JAN/UPC,GTIN,Global Trade Item Number (JAN/UPC/EAN),string,,,true,,4901234567890,Apparel>General,"Length 8-14 depends on scheme",v0.1
+size,サイズ,Size,Variant size label,string,,"XS;S;M;L;XL",false,,M,Apparel>General,,v0.1
+color,カラー,Color,Primary color,string,,,false,,Black,Apparel>General,,v0.1
+material,素材,Material,Primary material composition,string,,,false,,Polyester,Apparel>General,,v0.1
+description,商品説明,Description,Long description of the product,string,,,false,,Lightweight waterproof jacket,Apparel>General,,v0.1
+image_link,画像URL,Image Link,Primary image URL,string,url,,true,,https://example.com/img1.jpg,Apparel>General,,v0.1

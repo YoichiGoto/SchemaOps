@@ -1,0 +1,604 @@
+{
+  "canonicalAttributes": {
+    "kind": {
+      "canonicalName": "kind",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "kind",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "id": {
+      "canonicalName": "id",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "id",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        },
+        "shopify_admin_api": {
+          "mpAttributeName": "id",
+          "required": true,
+          "dataType": "integer",
+          "maxLength": null,
+          "description": "Product ID"
+        }
+      },
+      "dataTypes": [
+        "str",
+        "integer"
+      ],
+      "requiredFlags": [
+        false,
+        true
+      ],
+      "maxLengths": []
+    },
+    "offerid": {
+      "canonicalName": "offerid",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "offerId",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "source": {
+      "canonicalName": "source",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "source",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "title": {
+      "canonicalName": "title",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "title",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        },
+        "shopify_admin_api": {
+          "mpAttributeName": "title",
+          "required": true,
+          "dataType": "string",
+          "maxLength": 255,
+          "description": "Product title"
+        }
+      },
+      "dataTypes": [
+        "str",
+        "string"
+      ],
+      "requiredFlags": [
+        false,
+        true
+      ],
+      "maxLengths": [
+        255
+      ]
+    },
+    "description": {
+      "canonicalName": "description",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "description",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "imagelink": {
+      "canonicalName": "imagelink",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "imageLink",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "contentlanguage": {
+      "canonicalName": "contentlanguage",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "contentLanguage",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "targetcountry": {
+      "canonicalName": "targetcountry",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "targetCountry",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "feedlabel": {
+      "canonicalName": "feedlabel",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "feedLabel",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "channel": {
+      "canonicalName": "channel",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "channel",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "availability": {
+      "canonicalName": "availability",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "availability",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "condition": {
+      "canonicalName": "condition",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "condition",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "googleproductcategory": {
+      "canonicalName": "googleproductcategory",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "googleProductCategory",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "gtin": {
+      "canonicalName": "gtin",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "gtin",
+          "required": false,
+          "dataType": "str",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "str"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "price": {
+      "canonicalName": "price",
+      "mappings": {
+        "google_merchant_center": {
+          "mpAttributeName": "price",
+          "required": false,
+          "dataType": "dict",
+          "maxLength": null,
+          "description": ""
+        }
+      },
+      "dataTypes": [
+        "dict"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "luggage.item_name": {
+      "canonicalName": "luggage.item_name",
+      "mappings": {
+        "amazon_sp_api": {
+          "mpAttributeName": "LUGGAGE.item_name",
+          "required": false,
+          "dataType": "string",
+          "maxLength": null,
+          "description": "Information to uniquely identify your product (e.g., UPC, EAN, GTIN, Product Type, Brand)"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "luggage.brand": {
+      "canonicalName": "luggage.brand",
+      "mappings": {
+        "amazon_sp_api": {
+          "mpAttributeName": "LUGGAGE.brand",
+          "required": false,
+          "dataType": "string",
+          "maxLength": null,
+          "description": "Information to uniquely identify your product (e.g., UPC, EAN, GTIN, Product Type, Brand)"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "luggage.external_product_id": {
+      "canonicalName": "luggage.external_product_id",
+      "mappings": {
+        "amazon_sp_api": {
+          "mpAttributeName": "LUGGAGE.external_product_id",
+          "required": false,
+          "dataType": "string",
+          "maxLength": null,
+          "description": "Information to uniquely identify your product (e.g., UPC, EAN, GTIN, Product Type, Brand)"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "luggage.gtin_exemption_reason": {
+      "canonicalName": "luggage.gtin_exemption_reason",
+      "mappings": {
+        "amazon_sp_api": {
+          "mpAttributeName": "LUGGAGE.gtin_exemption_reason",
+          "required": false,
+          "dataType": "string",
+          "maxLength": null,
+          "description": "Information to uniquely identify your product (e.g., UPC, EAN, GTIN, Product Type, Brand)"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "luggage.merchant_suggested_asin": {
+      "canonicalName": "luggage.merchant_suggested_asin",
+      "mappings": {
+        "amazon_sp_api": {
+          "mpAttributeName": "LUGGAGE.merchant_suggested_asin",
+          "required": false,
+          "dataType": "string",
+          "maxLength": null,
+          "description": "Information to uniquely identify your product (e.g., UPC, EAN, GTIN, Product Type, Brand)"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "luggage.product_type": {
+      "canonicalName": "luggage.product_type",
+      "mappings": {
+        "amazon_sp_api": {
+          "mpAttributeName": "LUGGAGE.product_type",
+          "required": false,
+          "dataType": "string",
+          "maxLength": null,
+          "description": "Information to uniquely identify your product (e.g., UPC, EAN, GTIN, Product Type, Brand)"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "luggage.product_category": {
+      "canonicalName": "luggage.product_category",
+      "mappings": {
+        "amazon_sp_api": {
+          "mpAttributeName": "LUGGAGE.product_category",
+          "required": false,
+          "dataType": "string",
+          "maxLength": null,
+          "description": "Information to uniquely identify your product (e.g., UPC, EAN, GTIN, Product Type, Brand)"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "luggage.product_subcategory": {
+      "canonicalName": "luggage.product_subcategory",
+      "mappings": {
+        "amazon_sp_api": {
+          "mpAttributeName": "LUGGAGE.product_subcategory",
+          "required": false,
+          "dataType": "string",
+          "maxLength": null,
+          "description": "Information to uniquely identify your product (e.g., UPC, EAN, GTIN, Product Type, Brand)"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "luggage.item_type_keyword": {
+      "canonicalName": "luggage.item_type_keyword",
+      "mappings": {
+        "amazon_sp_api": {
+          "mpAttributeName": "LUGGAGE.item_type_keyword",
+          "required": false,
+          "dataType": "string",
+          "maxLength": null,
+          "description": "Information to uniquely identify your product (e.g., UPC, EAN, GTIN, Product Type, Brand)"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "body_html": {
+      "canonicalName": "body_html",
+      "mappings": {
+        "shopify_admin_api": {
+          "mpAttributeName": "body_html",
+          "required": false,
+          "dataType": "string",
+          "maxLength": null,
+          "description": "Product description HTML"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "vendor": {
+      "canonicalName": "vendor",
+      "mappings": {
+        "shopify_admin_api": {
+          "mpAttributeName": "vendor",
+          "required": false,
+          "dataType": "string",
+          "maxLength": 255,
+          "description": "Product vendor"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": [
+        255
+      ]
+    },
+    "product_type": {
+      "canonicalName": "product_type",
+      "mappings": {
+        "shopify_admin_api": {
+          "mpAttributeName": "product_type",
+          "required": false,
+          "dataType": "string",
+          "maxLength": 255,
+          "description": "Product type"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": [
+        255
+      ]
+    },
+    "tags": {
+      "canonicalName": "tags",
+      "mappings": {
+        "shopify_admin_api": {
+          "mpAttributeName": "tags",
+          "required": false,
+          "dataType": "string",
+          "maxLength": null,
+          "description": "Product tags (comma-separated)"
+        }
+      },
+      "dataTypes": [
+        "string"
+      ],
+      "requiredFlags": [
+        false
+      ],
+      "maxLengths": []
+    },
+    "variants": {
+      "canonicalName": "variants",
+      "mappings": {
+        "shopify_admin_api": {
+          "mpAttributeName": "variants",
+          "required": true,
+          "dataType": "array",
+          "maxLength": null,
+          "description": "Product variants"
+        }
+      },
+      "dataTypes": [
+        "array"
+      ],
+      "requiredFlags": [
+        true
+      ],
+      "maxLengths": []
+    }
+  },
+  "generatedAt": "2025-11-01T21:05:29.081973",
+  "sourceAPIs": [
+    "google_merchant_center",
+    "amazon_sp_api",
+    "shopify_admin_api"
+  ]
+}

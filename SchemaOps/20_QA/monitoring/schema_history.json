@@ -1,0 +1,197 @@
+{
+  "google_merchant_center": {
+    "hash": "4b39468acfb07fb29c2a2ec84fa8dc2d",
+    "schema": {
+      "attributes": [
+        {
+          "name": "id",
+          "required": true,
+          "dataType": "string",
+          "maxLength": 50,
+          "description": "Unique product identifier"
+        },
+        {
+          "name": "title",
+          "required": true,
+          "dataType": "string",
+          "maxLength": 150,
+          "description": "Product title"
+        },
+        {
+          "name": "description",
+          "required": true,
+          "dataType": "string",
+          "maxLength": 5000,
+          "description": "Product description"
+        },
+        {
+          "name": "brand",
+          "required": true,
+          "dataType": "string",
+          "maxLength": 70,
+          "description": "Product brand"
+        },
+        {
+          "name": "gtin",
+          "required": true,
+          "dataType": "string",
+          "maxLength": 50,
+          "description": "Global Trade Item Number"
+        },
+        {
+          "name": "size",
+          "required": false,
+          "dataType": "string",
+          "maxLength": 100,
+          "description": "Product size"
+        },
+        {
+          "name": "color",
+          "required": false,
+          "dataType": "string",
+          "maxLength": 100,
+          "description": "Product color"
+        }
+      ],
+      "extractedAt": "2025-10-23T18:24:25.031835",
+      "source": "google_merchant_center_api",
+      "version": "2024-01"
+    },
+    "lastUpdated": "2025-10-23T18:25:42.070039"
+  },
+  "amazon_sp_api": {
+    "hash": "7d776225e75ec920a63baf97cbb99010",
+    "schema": {
+      "attributes": [
+        {
+          "name": "ASIN",
+          "required": true,
+          "dataType": "string",
+          "maxLength": 10,
+          "description": "Amazon Standard Identification Number"
+        },
+        {
+          "name": "Title",
+          "required": true,
+          "dataType": "string",
+          "maxLength": 200,
+          "description": "Product title"
+        },
+        {
+          "name": "Brand",
+          "required": true,
+          "dataType": "string",
+          "maxLength": 50,
+          "description": "Product brand"
+        },
+        {
+          "name": "Manufacturer",
+          "required": false,
+          "dataType": "string",
+          "maxLength": 50,
+          "description": "Product manufacturer"
+        },
+        {
+          "name": "ItemPackageDimensions",
+          "required": false,
+          "dataType": "object",
+          "description": "Package dimensions"
+        },
+        {
+          "name": "Color",
+          "required": false,
+          "dataType": "string",
+          "maxLength": 50,
+          "description": "Product color"
+        },
+        {
+          "name": "Size",
+          "required": false,
+          "dataType": "string",
+          "maxLength": 50,
+          "description": "Product size"
+        }
+      ],
+      "extractedAt": "2025-10-23T18:24:25.031908",
+      "source": "amazon_sp_api",
+      "version": "2024-01"
+    },
+    "lastUpdated": "2025-10-23T18:25:42.070983"
+  },
+  "shopify_admin_api": {
+    "hash": "c0562bdd1362f483b649ee64468d10d5",
+    "schema": {
+      "attributes": [
+        {
+          "name": "id",
+          "required": true,
+          "dataType": "integer",
+          "description": "Product ID"
+        },
+        {
+          "name": "title",
+          "required": true,
+          "dataType": "string",
+          "maxLength": 255,
+          "description": "Product title"
+        },
+        {
+          "name": "body_html",
+          "required": false,
+          "dataType": "string",
+          "description": "Product description HTML"
+        },
+        {
+          "name": "vendor",
+          "required": false,
+          "dataType": "string",
+          "maxLength": 255,
+          "description": "Product vendor"
+        },
+        {
+          "name": "product_type",
+          "required": false,
+          "dataType": "string",
+          "maxLength": 255,
+          "description": "Product type"
+        },
+        {
+          "name": "tags",
+          "required": false,
+          "dataType": "string",
+          "description": "Product tags (comma-separated)"
+        },
+        {
+          "name": "variants",
+          "required": true,
+          "dataType": "array",
+          "description": "Product variants"
+        }
+      ],
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "size",
+          "type": "single_line_text_field",
+          "description": "Product size"
+        },
+        {
+          "namespace": "custom",
+          "key": "color",
+          "type": "single_line_text_field",
+          "description": "Product color"
+        },
+        {
+          "namespace": "custom",
+          "key": "material",
+          "type": "single_line_text_field",
+          "description": "Product material"
+        }
+      ],
+      "extractedAt": "2025-10-23T18:24:25.031929",
+      "source": "shopify_admin_api",
+      "version": "2024-01"
+    },
+    "lastUpdated": "2025-10-23T18:25:42.071930"
+  }
+}
