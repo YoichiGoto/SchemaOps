@@ -743,6 +743,475 @@ class AmazonSPAPI:
                 "error": str(e)
             }
 
+class MiraklAPI:
+    """Mirakl Marketplace API client."""
+    
+    def __init__(self, api_key: Optional[str] = None, operator_id: Optional[str] = None, base_url: Optional[str] = None):
+        # Mirakl API typically uses operator_id in the URL path
+        # Base URL format: https://{operator_id}.mirakl.net/api
+        self.api_key = api_key
+        self.operator_id = operator_id
+        # If base_url is provided, use it; otherwise construct from operator_id
+        # Mirakl Seller/Front API: https://{domain}.mirakl.net/api
+        if base_url:
+            self.default_base_url = base_url
+        elif operator_id:
+            self.default_base_url = f"https://{operator_id}.mirakl.net/api"
+        else:
+            # Default: use prod environment endpoint
+            # Can be overridden via config file
+            self.default_base_url = "https://onlinemetalsus-prod.mirakl.net/api"
+        self.config = APIConfig(
+            name="mirakl_api",
+            base_url=self.default_base_url,
+            auth_type="api_key",
+            rate_limit=100,  # per second (adjust based on actual limits)
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}" if api_key else ""
+            }
+        )
+    
+    def _get_base_url(self) -> str:
+        """Get the base URL for Mirakl API."""
+        if self.operator_id:
+            return f"https://{self.operator_id}.mirakl.net/api"
+        return self.default_base_url
+    
+    def _get_headers(self) -> Dict[str, str]:
+        """Get headers with authentication."""
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            # Mirakl Seller API uses API key directly in Authorization header (not Bearer prefix)
+            # According to documentation: Authorization: Bearer {api_key} is for Personal Settings > API key
+            headers["Authorization"] = self.api_key  # Direct API key, no Bearer prefix
+        return headers
+    
+    def _get_auth_params(self) -> Dict[str, str]:
+        """Get authentication parameters for query string."""
+        params = {}
+        if self.api_key:
+            # Mirakl may also accept API key as query parameter
+            params["api_key"] = self.api_key
+        return params
+    
+    def get_product_schema(self) -> Dict[str, Any]:
+        """Get product schema from Mirakl API."""
+        attributes = []
+        version = datetime.now().strftime("%Y-%m-%d")
+        base_url = self._get_base_url()
+        headers = self._get_headers()
+        
+        try:
+            # Method 1: Load OpenAPI specification from local files
+            # Priority: Seller > Front > Operator (since we're using Seller API)
+            openapi_files = [
+                ("seller", Path(__file__).parent.parent / "openapi3-download_seller.json"),
+                ("front", Path(__file__).parent.parent / "openapi3-download_front.json"),
+                ("operator", Path(__file__).parent.parent / "openapi3-download_operator.json")
+            ]
+            
+            openapi_spec = None
+            openapi_source = None
+            
+            # Try to load from local files first
+            for source_name, file_path in openapi_files:
+                if file_path.exists():
+                    try:
+                        logger.info(f"Loading Mirakl OpenAPI specification from {file_path.name} ({source_name})...")
+                        with open(file_path, 'r', encoding='utf-8') as f:
+                            openapi_spec = json.load(f)
+                        openapi_source = source_name
+                        logger.info(f"Successfully loaded Mirakl OpenAPI specification from {source_name}")
+                        break
+                    except Exception as e:
+                        logger.warning(f"Failed to load OpenAPI file {file_path}: {e}")
+                        continue
+            
+            # Fallback: Try to fetch from API endpoint
+            if openapi_spec is None:
+                auth_params = self._get_auth_params()
+                openapi_url = f"{base_url}/openapi.json"
+                try:
+                    logger.info(f"Attempting to fetch Mirakl OpenAPI specification from {openapi_url}...")
+                    response = requests.get(openapi_url, headers=headers, params=auth_params, timeout=10)
+                    if response.status_code == 200:
+                        openapi_spec = response.json()
+                        openapi_source = "api_endpoint"
+                        logger.info("Successfully downloaded Mirakl OpenAPI specification from API")
+                except Exception as e:
+                    logger.debug(f"OpenAPI spec not available from API: {e}")
+            
+            # Extract schemas from OpenAPI spec
+            if openapi_spec and 'components' in openapi_spec and 'schemas' in openapi_spec['components']:
+                schemas = openapi_spec['components']['schemas']
+                logger.info(f"Processing {len(schemas)} schemas from OpenAPI specification...")
+                
+                # Look for product/offer/service related schemas
+                # Check both schema name and properties content
+                processed_schemas = set()
+                for schema_name, schema_def in schemas.items():
+                    schema_lower = schema_name.lower()
+                    schema_str = json.dumps(schema_def).lower()
+                    
+                    # Check if schema is related to products/offers/services
+                    is_product_related = (
+                        any(keyword in schema_lower for keyword in ['offer', 'product', 'item', 'catalog', 'service', 'sku']) or
+                        any(keyword in schema_str for keyword in ['offer', 'product', 'sku', 'price', 'quantity', 'title', 'description', 'catalog'])
+                    )
+                    
+                    if is_product_related:
+                        # Extract properties from this schema
+                        properties = schema_def.get("properties", {})
+                        required_fields = schema_def.get("required", [])
+                        
+                        if properties:  # Only process schemas with properties
+                            # Process each property
+                            for prop_name, prop_def in properties.items():
+                                # Create unique attribute name
+                                attr_name = f"{schema_name}.{prop_name}"
+                                if attr_name not in processed_schemas:
+                                    processed_schemas.add(attr_name)
+                                    
+                                    # Determine data type
+                                    data_type = self._extract_data_type(prop_def)
+                                    
+                                    attributes.append({
+                                        "name": attr_name,
+                                        "required": prop_name in required_fields,
+                                        "dataType": data_type,
+                                        "description": prop_def.get("description", ""),
+                                        "schema": schema_name,
+                                        "source": f"openapi_{openapi_source}"
+                                    })
+                                    
+                                    # If property is an object, extract nested properties
+                                    if isinstance(prop_def, dict):
+                                        if "$ref" in prop_def:
+                                            # Resolve reference
+                                            ref_path = prop_def["$ref"].split("/")
+                                            if len(ref_path) == 4 and ref_path[1] == "components" and ref_path[2] == "schemas":
+                                                ref_schema_name = ref_path[3]
+                                                if ref_schema_name in schemas:
+                                                    ref_schema = schemas[ref_schema_name]
+                                                    ref_properties = ref_schema.get("properties", {})
+                                                    ref_required = ref_schema.get("required", [])
+                                                    for ref_prop_name, ref_prop_def in ref_properties.items():
+                                                        nested_attr_name = f"{schema_name}.{prop_name}.{ref_prop_name}"
+                                                        if nested_attr_name not in processed_schemas:
+                                                            processed_schemas.add(nested_attr_name)
+                                                            attributes.append({
+                                                                "name": nested_attr_name,
+                                                                "required": ref_prop_name in ref_required,
+                                                                "dataType": self._extract_data_type(ref_prop_def),
+                                                                "description": ref_prop_def.get("description", ""),
+                                                                "schema": ref_schema_name,
+                                                                "parentField": prop_name,
+                                                                "source": f"openapi_{openapi_source}_ref"
+                                                            })
+                                        elif prop_def.get("type") == "object" and "properties" in prop_def:
+                                            # Inline object definition
+                                            nested_props = prop_def["properties"]
+                                            nested_required = prop_def.get("required", [])
+                                            for nested_prop_name, nested_prop_def in nested_props.items():
+                                                nested_attr_name = f"{schema_name}.{prop_name}.{nested_prop_name}"
+                                                if nested_attr_name not in processed_schemas:
+                                                    processed_schemas.add(nested_attr_name)
+                                                    attributes.append({
+                                                        "name": nested_attr_name,
+                                                        "required": nested_prop_name in nested_required,
+                                                        "dataType": self._extract_data_type(nested_prop_def),
+                                                        "description": nested_prop_def.get("description", ""),
+                                                        "schema": schema_name,
+                                                        "parentField": prop_name,
+                                                        "source": f"openapi_{openapi_source}_inline"
+                                                    })
+                
+                logger.info(f"Extracted {len([a for a in attributes if 'openapi' in a.get('source', '')])} attributes from OpenAPI specification")
+            
+            # Method 2: Get actual offer data from Offers API to infer schema
+            # Mirakl Seller API uses /offers endpoint, not /products
+            if not attributes or len(attributes) < 10:  # If OpenAPI didn't give us enough, try API
+                try:
+                    offers_url = f"{base_url}/offers"
+                    logger.info(f"Fetching offers from Mirakl API to infer schema...")
+                    
+                    # Try to get sample offers
+                    params = {"max": 10}  # Get multiple offers for comprehensive schema
+                    # Note: Mirakl Seller API uses API key directly in Authorization header (not Bearer)
+                    response = requests.get(offers_url, headers=headers, params=params, timeout=10)
+                    
+                    logger.info(f"Mirakl Offers API response status: {response.status_code}")
+                    if response.status_code == 200:
+                        offers_data = response.json()
+                        logger.info(f"Mirakl Offers API response structure: {list(offers_data.keys()) if isinstance(offers_data, dict) else 'list'}")
+                        
+                        # Handle different response structures
+                        offers = []
+                        if isinstance(offers_data, dict):
+                            if 'offers' in offers_data:
+                                offers = offers_data['offers']
+                            elif 'data' in offers_data:
+                                offers = offers_data['data']
+                            elif 'items' in offers_data:
+                                offers = offers_data['items']
+                            elif 'results' in offers_data:
+                                offers = offers_data['results']
+                            # Check if the dict itself is an offer (single offer response)
+                            elif any(key in offers_data for key in ['offer_id', 'id', 'product_sku', 'sku', 'product_id', 'title', 'name']):
+                                offers = [offers_data]
+                        elif isinstance(offers_data, list):
+                            offers = offers_data
+                        
+                        logger.info(f"Found {len(offers)} offers from Mirakl API")
+                        for offer in offers[:5]:  # Use first 5 offers to get comprehensive schema
+                            if isinstance(offer, dict):
+                                for key, value in offer.items():
+                                    # Check if attribute already exists (by name without prefix)
+                                    existing_names = [attr.get('name', '').split('.')[-1] for attr in attributes]
+                                    if key not in existing_names:
+                                        attributes.append({
+                                            "name": f"Offer.{key}",
+                                            "required": False,
+                                            "dataType": self._infer_data_type(value),
+                                            "description": f"Field from Mirakl Offers API",
+                                            "source": "offers_api"
+                                        })
+                                        
+                                        # Extract nested attributes
+                                        if isinstance(value, dict):
+                                            for nested_key, nested_value in value.items():
+                                                nested_name = f"{key}.{nested_key}"
+                                                if nested_name not in existing_names:
+                                                    attributes.append({
+                                                        "name": f"Offer.{key}.{nested_key}",
+                                                        "required": False,
+                                                        "dataType": self._infer_data_type(nested_value),
+                                                        "description": f"Nested field from Mirakl API",
+                                                        "source": "offers_api",
+                                                        "parentField": key
+                                                    })
+                                        
+                                        # If value is array of objects, extract structure from first item
+                                        if isinstance(value, list) and value and isinstance(value[0], dict):
+                                            for array_item_key in value[0].keys():
+                                                array_name = f"{key}.{array_item_key}"
+                                                if array_name not in existing_names:
+                                                    attributes.append({
+                                                        "name": f"Offer.{key}.{array_item_key}",
+                                                        "required": False,
+                                                        "dataType": self._infer_data_type(value[0][array_item_key]),
+                                                        "description": f"Array item field from Mirakl API",
+                                                        "source": "offers_api",
+                                                        "parentField": key
+                                                    })
+                    
+                except Exception as e:
+                    logger.warning(f"Error fetching offers from Mirakl API: {e}")
+            
+            # Method 3: Get category hierarchies to understand product structure
+            if not attributes or len(attributes) < 10:
+                try:
+                    hierarchies_url = f"{base_url}/hierarchies"
+                    logger.info(f"Fetching hierarchies from Mirakl API...")
+                    params = {"max": 1}
+                    response = requests.get(hierarchies_url, headers=headers, params=params, timeout=10)
+                    
+                    logger.info(f"Mirakl Hierarchies API response status: {response.status_code}")
+                    if response.status_code == 200:
+                        logger.info(f"Mirakl Hierarchies API response structure: {list(response.json().keys()) if isinstance(response.json(), dict) else 'list'}")
+                        hierarchies_data = response.json()
+                        
+                        # Extract category-related attributes
+                        hierarchies = []
+                        if isinstance(hierarchies_data, dict):
+                            if 'hierarchies' in hierarchies_data:
+                                hierarchies = hierarchies_data['hierarchies']
+                            elif 'data' in hierarchies_data:
+                                hierarchies = hierarchies_data['data']
+                            elif isinstance(hierarchies_data.get('categories'), list):
+                                hierarchies = hierarchies_data['categories']
+                        elif isinstance(hierarchies_data, list):
+                            hierarchies = hierarchies_data
+                        
+                        if hierarchies:
+                            logger.info(f"Found {len(hierarchies)} hierarchies from Mirakl API")
+                            # Extract attributes from first few hierarchies
+                            for hierarchy in hierarchies[:3]:
+                                if isinstance(hierarchy, dict):
+                                    for key, value in hierarchy.items():
+                                        # Check if attribute already exists
+                                        existing_names = [attr.get('name', '').split('.')[-1] for attr in attributes]
+                                        if key not in existing_names:
+                                            attributes.append({
+                                                "name": f"Category.{key}",
+                                                "required": False,
+                                                "dataType": self._infer_data_type(value),
+                                                "description": f"Category field from Mirakl Hierarchies API",
+                                                "source": "hierarchies_api"
+                                            })
+                                            
+                                            # Extract nested attributes
+                                            if isinstance(value, dict):
+                                                for nested_key, nested_value in value.items():
+                                                    nested_name = f"{key}.{nested_key}"
+                                                    if nested_name not in existing_names:
+                                                        attributes.append({
+                                                            "name": f"Category.{key}.{nested_key}",
+                                                            "required": False,
+                                                            "dataType": self._infer_data_type(nested_value),
+                                                            "description": f"Nested category field from Mirakl API",
+                                                            "source": "hierarchies_api",
+                                                            "parentField": key
+                                                        })
+                                            
+                                            # If value is array of objects, extract structure from first item
+                                            if isinstance(value, list) and value and isinstance(value[0], dict):
+                                                for array_item_key in value[0].keys():
+                                                    array_name = f"{key}.{array_item_key}"
+                                                    if array_name not in existing_names:
+                                                        attributes.append({
+                                                            "name": f"Category.{key}.{array_item_key}",
+                                                            "required": False,
+                                                            "dataType": self._infer_data_type(value[0][array_item_key]),
+                                                            "description": f"Array item field from Mirakl Hierarchies API",
+                                                            "source": "hierarchies_api",
+                                                            "parentField": key
+                                                        })
+                
+                except Exception as e:
+                    logger.warning(f"Error fetching hierarchies from Mirakl API: {e}")
+            
+            if not attributes:
+                logger.warning("No attributes extracted from Mirakl API, using fallback schema")
+                # Fallback: Use common Mirakl product attributes based on documentation
+                attributes = self._get_fallback_schema()
+            
+            schema = {
+                "attributes": attributes,
+                "extractedAt": datetime.now().isoformat(),
+                "source": "mirakl_api",
+                "version": version,
+                "apiBaseUrl": base_url
+            }
+            
+            logger.info(f"Extracted {len(attributes)} attributes from Mirakl API")
+            return schema
+            
+        except Exception as e:
+            logger.error(f"Error extracting Mirakl API schema: {e}")
+            # Return fallback schema on error
+            return {
+                "attributes": self._get_fallback_schema(),
+                "extractedAt": datetime.now().isoformat(),
+                "source": "mirakl_api_fallback",
+                "version": version,
+                "error": str(e)
+            }
+    
+    def _extract_data_type(self, prop_def: Dict[str, Any]) -> str:
+        """Extract data type from OpenAPI property definition."""
+        prop_type = prop_def.get("type", "string")
+        
+        if prop_type == "array":
+            items = prop_def.get("items", {})
+            item_type = items.get("type", "string")
+            return f"array<{item_type}>"
+        
+        if "$ref" in prop_def:
+            # Reference to another schema
+            ref = prop_def["$ref"]
+            return f"ref:{ref.split('/')[-1]}"
+        
+        return prop_type
+    
+    def _infer_data_type(self, value: Any) -> str:
+        """Infer data type from value."""
+        if value is None:
+            return "null"
+        elif isinstance(value, bool):
+            return "boolean"
+        elif isinstance(value, int):
+            return "integer"
+        elif isinstance(value, float):
+            return "number"
+        elif isinstance(value, list):
+            if value and isinstance(value[0], dict):
+                return "array<object>"
+            return "array"
+        elif isinstance(value, dict):
+            return "object"
+        else:
+            return "string"
+    
+    def _get_fallback_schema(self) -> List[Dict[str, Any]]:
+        """Fallback schema based on Mirakl documentation."""
+        return [
+            {
+                "name": "product_id",
+                "required": True,
+                "dataType": "string",
+                "description": "Unique product identifier",
+                "source": "fallback"
+            },
+            {
+                "name": "product_sku",
+                "required": True,
+                "dataType": "string",
+                "description": "Product SKU",
+                "source": "fallback"
+            },
+            {
+                "name": "title",
+                "required": True,
+                "dataType": "string",
+                "description": "Product title",
+                "source": "fallback"
+            },
+            {
+                "name": "description",
+                "required": False,
+                "dataType": "string",
+                "description": "Product description",
+                "source": "fallback"
+            },
+            {
+                "name": "category",
+                "required": False,
+                "dataType": "object",
+                "description": "Product category information",
+                "source": "fallback"
+            },
+            {
+                "name": "price",
+                "required": False,
+                "dataType": "number",
+                "description": "Product price",
+                "source": "fallback"
+            },
+            {
+                "name": "quantity",
+                "required": False,
+                "dataType": "integer",
+                "description": "Product quantity",
+                "source": "fallback"
+            },
+            {
+                "name": "images",
+                "required": False,
+                "dataType": "array",
+                "description": "Product images",
+                "source": "fallback"
+            },
+            {
+                "name": "attributes",
+                "required": False,
+                "dataType": "array",
+                "description": "Product attributes/custom fields",
+                "source": "fallback"
+            }
+        ]
+
 class ShopifyAdminAPI:
     """Shopify Admin API client."""
     
@@ -958,6 +1427,8 @@ class SchemaExtractor:
                 task = api_client.get_product_schema("ATVPDKIKX0DER")
             elif name == "shopify_admin_api":
                 task = api_client.get_product_schema()
+            elif name == "mirakl_api":
+                task = api_client.get_product_schema()
             else:
                 continue
             
@@ -1074,6 +1545,35 @@ def main():
     )
     
     shopify_api = ShopifyAdminAPI("demo-shop", "demo-access-token")
+    
+    # Mirakl API: Load credentials from environment variables or config file
+    mirakl_api_key = os.environ.get("MIRAKL_API_KEY")
+    
+    # Try to load from SchemaOps config file if env var not set
+    if not mirakl_api_key:
+        config_path = Path(__file__).parent.parent / "config" / "mirakl_api.json"
+        if config_path.exists():
+            try:
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+                mirakl_api_key = mirakl_api_key or config.get('api_key')
+                mirakl_operator_id = config.get('operator_id')
+                mirakl_base_url = config.get('base_url')
+                logger.info(f"Loaded Mirakl API credentials from {config_path}")
+            except Exception as e:
+                logger.warning(f"Could not load Mirakl credentials from {config_path}: {e}")
+                mirakl_operator_id = None
+        else:
+            mirakl_operator_id = None
+    else:
+        mirakl_operator_id = os.environ.get("MIRAKL_OPERATOR_ID")
+    
+    # Initialize Mirakl API if credentials are available
+    if mirakl_api_key:
+        mirakl_api = MiraklAPI(api_key=mirakl_api_key, operator_id=mirakl_operator_id, base_url=mirakl_base_url)
+        extractor.register_api("mirakl_api", mirakl_api)
+    else:
+        logger.warning("Mirakl API credentials not provided, skipping Mirakl schema extraction")
     
     extractor.register_api("google_merchant_center", google_api)
     extractor.register_api("amazon_sp_api", amazon_api)
