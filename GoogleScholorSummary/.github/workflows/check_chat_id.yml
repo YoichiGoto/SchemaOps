@@ -1,0 +1,26 @@
+name: Check Lark Chat ID
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check_id:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install requests
+        run: pip install requests python-dotenv
+
+      - name: Run Get Chat ID Script
+        env:
+          LARK_APP_ID: ${{ secrets.LARK_APP_ID }}
+          LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
+        run: python get_chat_id.py
+
