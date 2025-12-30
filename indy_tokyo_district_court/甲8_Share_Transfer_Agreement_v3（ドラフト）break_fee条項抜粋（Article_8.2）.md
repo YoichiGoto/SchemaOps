@@ -31,10 +31,8 @@ If the Lender Consent referred to in Article 4(iii) is not obtained by the sched
 
 **備考**
 
+本抜粋は、原告と被告との間で交渉されていた Share Transfer Agreement（確定契約）ドラフト第3版の Article 8.2 から抜粋したものである。
+
 本抜粋の前後の文脈については、甲8-2（STA全文）を参照されたい。
-
----
-
-出典：`indy/SHARE TRANSFER AGREEMENTv3.md`（Article 8.2）
 
 以上
