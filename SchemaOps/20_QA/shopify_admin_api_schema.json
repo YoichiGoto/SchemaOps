@@ -1,0 +1,72 @@
+{
+  "attributes": [
+    {
+      "name": "id",
+      "required": true,
+      "dataType": "integer",
+      "description": "Product ID"
+    },
+    {
+      "name": "title",
+      "required": true,
+      "dataType": "string",
+      "maxLength": 255,
+      "description": "Product title"
+    },
+    {
+      "name": "body_html",
+      "required": false,
+      "dataType": "string",
+      "description": "Product description HTML"
+    },
+    {
+      "name": "vendor",
+      "required": false,
+      "dataType": "string",
+      "maxLength": 255,
+      "description": "Product vendor"
+    },
+    {
+      "name": "product_type",
+      "required": false,
+      "dataType": "string",
+      "maxLength": 255,
+      "description": "Product type"
+    },
+    {
+      "name": "tags",
+      "required": false,
+      "dataType": "string",
+      "description": "Product tags (comma-separated)"
+    },
+    {
+      "name": "variants",
+      "required": true,
+      "dataType": "array",
+      "description": "Product variants"
+    }
+  ],
+  "metafields": [
+    {
+      "namespace": "custom",
+      "key": "size",
+      "type": "single_line_text_field",
+      "description": "Product size"
+    },
+    {
+      "namespace": "custom",
+      "key": "color",
+      "type": "single_line_text_field",
+      "description": "Product color"
+    },
+    {
+      "namespace": "custom",
+      "key": "material",
+      "type": "single_line_text_field",
+      "description": "Product material"
+    }
+  ],
+  "extractedAt": "2025-11-01T22:15:01.074660",
+  "source": "shopify_admin_api",
+  "version": "2024-01"
+}

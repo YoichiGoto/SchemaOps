@@ -1,0 +1,16 @@
+{
+  "date": "2025-10-23",
+  "target": "retailer",
+  "name": "TestRetailer Vendor Spec",
+  "changeSummary": "Added: 17, Removed: 13, Modified: 0 | New columns: categoryIdOrPath, length, canonicalAttributeId, unitConversion, transformRule, mpName, exampleOut, valueList, mpAttributeName, required, min, approvalNotes, max, sourceURL, lastVerifiedAt, exampleIn, regexRule | Removed columns: allowedValues, notes, definition, categoryPath, unitStandard, version, dataType, conditionalRule, examples, requiredFlag, attributeName_ja, attributeName_en, attributeId",
+  "impactedAttributes": "None",
+  "severity": "major",
+  "SLA_hours": 120,
+  "ETA": 1761642996.388857,
+  "status": "new",
+  "owner": "ops",
+  "lastVerifiedAt": "2025-10-23",
+  "docURL": "",
+  "sourceURL": "file://TestRetailer/spec.xlsx",
+  "notes": "Automated diff analysis: 0 columns modified"
+}

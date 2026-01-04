@@ -1,0 +1,480 @@
+[
+  {
+    "id": "google_merchant_center_1761211542_-8549332661008318162",
+    "mp_name": "google_merchant_center",
+    "change_type": "attribute_added",
+    "attribute": "id",
+    "severity": "major",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "id",
+      "details": {
+        "name": "id",
+        "required": true,
+        "dataType": "string",
+        "maxLength": 50,
+        "description": "Unique product identifier"
+      },
+      "severity": "major"
+    },
+    "detected_at": "2025-10-23T18:25:42.070123",
+    "status": "new",
+    "sla_hours": 72,
+    "eta": "2025-10-26T18:25:42.070125"
+  },
+  {
+    "id": "google_merchant_center_1761211542_-5659522336203683926",
+    "mp_name": "google_merchant_center",
+    "change_type": "attribute_added",
+    "attribute": "title",
+    "severity": "major",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "title",
+      "details": {
+        "name": "title",
+        "required": true,
+        "dataType": "string",
+        "maxLength": 150,
+        "description": "Product title"
+      },
+      "severity": "major"
+    },
+    "detected_at": "2025-10-23T18:25:42.070131",
+    "status": "new",
+    "sla_hours": 72,
+    "eta": "2025-10-26T18:25:42.070132"
+  },
+  {
+    "id": "google_merchant_center_1761211542_2914353827569963546",
+    "mp_name": "google_merchant_center",
+    "change_type": "attribute_added",
+    "attribute": "description",
+    "severity": "major",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "description",
+      "details": {
+        "name": "description",
+        "required": true,
+        "dataType": "string",
+        "maxLength": 5000,
+        "description": "Product description"
+      },
+      "severity": "major"
+    },
+    "detected_at": "2025-10-23T18:25:42.070135",
+    "status": "new",
+    "sla_hours": 72,
+    "eta": "2025-10-26T18:25:42.070136"
+  },
+  {
+    "id": "google_merchant_center_1761211542_-5793195332350430848",
+    "mp_name": "google_merchant_center",
+    "change_type": "attribute_added",
+    "attribute": "brand",
+    "severity": "major",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "brand",
+      "details": {
+        "name": "brand",
+        "required": true,
+        "dataType": "string",
+        "maxLength": 70,
+        "description": "Product brand"
+      },
+      "severity": "major"
+    },
+    "detected_at": "2025-10-23T18:25:42.070138",
+    "status": "new",
+    "sla_hours": 72,
+    "eta": "2025-10-26T18:25:42.070139"
+  },
+  {
+    "id": "google_merchant_center_1761211542_-4356679662944271594",
+    "mp_name": "google_merchant_center",
+    "change_type": "attribute_added",
+    "attribute": "gtin",
+    "severity": "major",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "gtin",
+      "details": {
+        "name": "gtin",
+        "required": true,
+        "dataType": "string",
+        "maxLength": 50,
+        "description": "Global Trade Item Number"
+      },
+      "severity": "major"
+    },
+    "detected_at": "2025-10-23T18:25:42.070142",
+    "status": "new",
+    "sla_hours": 72,
+    "eta": "2025-10-26T18:25:42.070142"
+  },
+  {
+    "id": "google_merchant_center_1761211542_3008411704620037621",
+    "mp_name": "google_merchant_center",
+    "change_type": "attribute_added",
+    "attribute": "size",
+    "severity": "minor",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "size",
+      "details": {
+        "name": "size",
+        "required": false,
+        "dataType": "string",
+        "maxLength": 100,
+        "description": "Product size"
+      },
+      "severity": "minor"
+    },
+    "detected_at": "2025-10-23T18:25:42.070145",
+    "status": "new",
+    "sla_hours": 168,
+    "eta": "2025-10-30T18:25:42.070146"
+  },
+  {
+    "id": "google_merchant_center_1761211542_1836569299017714802",
+    "mp_name": "google_merchant_center",
+    "change_type": "attribute_added",
+    "attribute": "color",
+    "severity": "minor",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "color",
+      "details": {
+        "name": "color",
+        "required": false,
+        "dataType": "string",
+        "maxLength": 100,
+        "description": "Product color"
+      },
+      "severity": "minor"
+    },
+    "detected_at": "2025-10-23T18:25:42.070148",
+    "status": "new",
+    "sla_hours": 168,
+    "eta": "2025-10-30T18:25:42.070149"
+  },
+  {
+    "id": "amazon_sp_api_1761211542_-6887291094615156461",
+    "mp_name": "amazon_sp_api",
+    "change_type": "attribute_added",
+    "attribute": "ASIN",
+    "severity": "major",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "ASIN",
+      "details": {
+        "name": "ASIN",
+        "required": true,
+        "dataType": "string",
+        "maxLength": 10,
+        "description": "Amazon Standard Identification Number"
+      },
+      "severity": "major"
+    },
+    "detected_at": "2025-10-23T18:25:42.071012",
+    "status": "new",
+    "sla_hours": 72,
+    "eta": "2025-10-26T18:25:42.071014"
+  },
+  {
+    "id": "amazon_sp_api_1761211542_-6166308791369005464",
+    "mp_name": "amazon_sp_api",
+    "change_type": "attribute_added",
+    "attribute": "Title",
+    "severity": "major",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "Title",
+      "details": {
+        "name": "Title",
+        "required": true,
+        "dataType": "string",
+        "maxLength": 200,
+        "description": "Product title"
+      },
+      "severity": "major"
+    },
+    "detected_at": "2025-10-23T18:25:42.071017",
+    "status": "new",
+    "sla_hours": 72,
+    "eta": "2025-10-26T18:25:42.071018"
+  },
+  {
+    "id": "amazon_sp_api_1761211542_-6675146573416336515",
+    "mp_name": "amazon_sp_api",
+    "change_type": "attribute_added",
+    "attribute": "Brand",
+    "severity": "major",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "Brand",
+      "details": {
+        "name": "Brand",
+        "required": true,
+        "dataType": "string",
+        "maxLength": 50,
+        "description": "Product brand"
+      },
+      "severity": "major"
+    },
+    "detected_at": "2025-10-23T18:25:42.071021",
+    "status": "new",
+    "sla_hours": 72,
+    "eta": "2025-10-26T18:25:42.071022"
+  },
+  {
+    "id": "amazon_sp_api_1761211542_7689380114214607800",
+    "mp_name": "amazon_sp_api",
+    "change_type": "attribute_added",
+    "attribute": "Manufacturer",
+    "severity": "minor",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "Manufacturer",
+      "details": {
+        "name": "Manufacturer",
+        "required": false,
+        "dataType": "string",
+        "maxLength": 50,
+        "description": "Product manufacturer"
+      },
+      "severity": "minor"
+    },
+    "detected_at": "2025-10-23T18:25:42.071024",
+    "status": "new",
+    "sla_hours": 168,
+    "eta": "2025-10-30T18:25:42.071025"
+  },
+  {
+    "id": "amazon_sp_api_1761211542_-2959070508878077964",
+    "mp_name": "amazon_sp_api",
+    "change_type": "attribute_added",
+    "attribute": "ItemPackageDimensions",
+    "severity": "minor",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "ItemPackageDimensions",
+      "details": {
+        "name": "ItemPackageDimensions",
+        "required": false,
+        "dataType": "object",
+        "description": "Package dimensions"
+      },
+      "severity": "minor"
+    },
+    "detected_at": "2025-10-23T18:25:42.071027",
+    "status": "new",
+    "sla_hours": 168,
+    "eta": "2025-10-30T18:25:42.071028"
+  },
+  {
+    "id": "amazon_sp_api_1761211542_-7304447393449229583",
+    "mp_name": "amazon_sp_api",
+    "change_type": "attribute_added",
+    "attribute": "Color",
+    "severity": "minor",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "Color",
+      "details": {
+        "name": "Color",
+        "required": false,
+        "dataType": "string",
+        "maxLength": 50,
+        "description": "Product color"
+      },
+      "severity": "minor"
+    },
+    "detected_at": "2025-10-23T18:25:42.071030",
+    "status": "new",
+    "sla_hours": 168,
+    "eta": "2025-10-30T18:25:42.071031"
+  },
+  {
+    "id": "amazon_sp_api_1761211542_6009244192568468056",
+    "mp_name": "amazon_sp_api",
+    "change_type": "attribute_added",
+    "attribute": "Size",
+    "severity": "minor",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "Size",
+      "details": {
+        "name": "Size",
+        "required": false,
+        "dataType": "string",
+        "maxLength": 50,
+        "description": "Product size"
+      },
+      "severity": "minor"
+    },
+    "detected_at": "2025-10-23T18:25:42.071033",
+    "status": "new",
+    "sla_hours": 168,
+    "eta": "2025-10-30T18:25:42.071034"
+  },
+  {
+    "id": "shopify_admin_api_1761211542_-8549332661008318162",
+    "mp_name": "shopify_admin_api",
+    "change_type": "attribute_added",
+    "attribute": "id",
+    "severity": "major",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "id",
+      "details": {
+        "name": "id",
+        "required": true,
+        "dataType": "integer",
+        "description": "Product ID"
+      },
+      "severity": "major"
+    },
+    "detected_at": "2025-10-23T18:25:42.071979",
+    "status": "new",
+    "sla_hours": 72,
+    "eta": "2025-10-26T18:25:42.071983"
+  },
+  {
+    "id": "shopify_admin_api_1761211542_-5659522336203683926",
+    "mp_name": "shopify_admin_api",
+    "change_type": "attribute_added",
+    "attribute": "title",
+    "severity": "major",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "title",
+      "details": {
+        "name": "title",
+        "required": true,
+        "dataType": "string",
+        "maxLength": 255,
+        "description": "Product title"
+      },
+      "severity": "major"
+    },
+    "detected_at": "2025-10-23T18:25:42.071989",
+    "status": "new",
+    "sla_hours": 72,
+    "eta": "2025-10-26T18:25:42.071990"
+  },
+  {
+    "id": "shopify_admin_api_1761211542_4670632428451112963",
+    "mp_name": "shopify_admin_api",
+    "change_type": "attribute_added",
+    "attribute": "body_html",
+    "severity": "minor",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "body_html",
+      "details": {
+        "name": "body_html",
+        "required": false,
+        "dataType": "string",
+        "description": "Product description HTML"
+      },
+      "severity": "minor"
+    },
+    "detected_at": "2025-10-23T18:25:42.071993",
+    "status": "new",
+    "sla_hours": 168,
+    "eta": "2025-10-30T18:25:42.071994"
+  },
+  {
+    "id": "shopify_admin_api_1761211542_-4566172830470862550",
+    "mp_name": "shopify_admin_api",
+    "change_type": "attribute_added",
+    "attribute": "vendor",
+    "severity": "minor",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "vendor",
+      "details": {
+        "name": "vendor",
+        "required": false,
+        "dataType": "string",
+        "maxLength": 255,
+        "description": "Product vendor"
+      },
+      "severity": "minor"
+    },
+    "detected_at": "2025-10-23T18:25:42.071997",
+    "status": "new",
+    "sla_hours": 168,
+    "eta": "2025-10-30T18:25:42.071998"
+  },
+  {
+    "id": "shopify_admin_api_1761211542_6714777459903593204",
+    "mp_name": "shopify_admin_api",
+    "change_type": "attribute_added",
+    "attribute": "product_type",
+    "severity": "minor",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "product_type",
+      "details": {
+        "name": "product_type",
+        "required": false,
+        "dataType": "string",
+        "maxLength": 255,
+        "description": "Product type"
+      },
+      "severity": "minor"
+    },
+    "detected_at": "2025-10-23T18:25:42.072000",
+    "status": "new",
+    "sla_hours": 168,
+    "eta": "2025-10-30T18:25:42.072001"
+  },
+  {
+    "id": "shopify_admin_api_1761211542_6246563085537237558",
+    "mp_name": "shopify_admin_api",
+    "change_type": "attribute_added",
+    "attribute": "tags",
+    "severity": "minor",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "tags",
+      "details": {
+        "name": "tags",
+        "required": false,
+        "dataType": "string",
+        "description": "Product tags (comma-separated)"
+      },
+      "severity": "minor"
+    },
+    "detected_at": "2025-10-23T18:25:42.072004",
+    "status": "new",
+    "sla_hours": 168,
+    "eta": "2025-10-30T18:25:42.072005"
+  },
+  {
+    "id": "shopify_admin_api_1761211542_-1110445215264199441",
+    "mp_name": "shopify_admin_api",
+    "change_type": "attribute_added",
+    "attribute": "variants",
+    "severity": "major",
+    "details": {
+      "type": "attribute_added",
+      "attribute": "variants",
+      "details": {
+        "name": "variants",
+        "required": true,
+        "dataType": "array",
+        "description": "Product variants"
+      },
+      "severity": "major"
+    },
+    "detected_at": "2025-10-23T18:25:42.072007",
+    "status": "new",
+    "sla_hours": 72,
+    "eta": "2025-10-26T18:25:42.072008"
+  }
+]

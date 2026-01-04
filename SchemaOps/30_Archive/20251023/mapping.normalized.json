@@ -1,0 +1,319 @@
+{
+  "mappings": {
+    "GMC": [
+      {
+        "category": "Apparel & Accessories",
+        "mpAttributeName": "title",
+        "canonicalAttributeId": "title",
+        "transformRule": "truncate(150)",
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "true",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": "1-150",
+          "valueList": null
+        },
+        "example": {
+          "in": "Acme Hooded Jacket",
+          "out": "Acme Hooded Jacket"
+        },
+        "approvalNotes": null,
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      },
+      {
+        "category": "Apparel & Accessories",
+        "mpAttributeName": "description",
+        "canonicalAttributeId": "description",
+        "transformRule": "truncate(5000)",
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "false",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": "<=5000",
+          "valueList": null
+        },
+        "example": {
+          "in": "Waterproof jacket for men",
+          "out": "Waterproof jacket for men"
+        },
+        "approvalNotes": null,
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      },
+      {
+        "category": "Apparel & Accessories",
+        "mpAttributeName": "brand",
+        "canonicalAttributeId": "brand",
+        "transformRule": null,
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "true",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": null,
+          "valueList": null
+        },
+        "example": {
+          "in": "ACME",
+          "out": "ACME"
+        },
+        "approvalNotes": null,
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      },
+      {
+        "category": "Apparel & Accessories",
+        "mpAttributeName": "gtin",
+        "canonicalAttributeId": "gtin",
+        "transformRule": null,
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "conditional",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": null,
+          "valueList": null
+        },
+        "example": {
+          "in": "4901234567890",
+          "out": "4901234567890"
+        },
+        "approvalNotes": null,
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      },
+      {
+        "category": "Apparel & Accessories",
+        "mpAttributeName": "size",
+        "canonicalAttributeId": "size",
+        "transformRule": "lookup(sizeSynonyms)",
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "false",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": null,
+          "valueList": null
+        },
+        "example": {
+          "in": "XS;S;M;L;XL",
+          "out": "M"
+        },
+        "approvalNotes": "M",
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      },
+      {
+        "category": "Apparel & Accessories",
+        "mpAttributeName": "color",
+        "canonicalAttributeId": "color",
+        "transformRule": "normalizeColor()",
+        "regexRule": "regexReplace(^grey$",
+        "unitConversion": "gray)",
+        "required": null,
+        "constraints": {
+          "min": "false",
+          "max": null,
+          "length": null,
+          "valueList": null
+        },
+        "example": {
+          "in": "",
+          "out": "Grey"
+        },
+        "approvalNotes": "Gray",
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      }
+    ],
+    "Amazon": [
+      {
+        "category": "SHIRT",
+        "mpAttributeName": "item_name",
+        "canonicalAttributeId": "title",
+        "transformRule": "truncate(200)",
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "true",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": "1-200",
+          "valueList": null
+        },
+        "example": {
+          "in": "Acme Shirt",
+          "out": "Acme Shirt"
+        },
+        "approvalNotes": null,
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      },
+      {
+        "category": "SHIRT",
+        "mpAttributeName": "brand_name",
+        "canonicalAttributeId": "brand",
+        "transformRule": null,
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "true",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": null,
+          "valueList": null
+        },
+        "example": {
+          "in": "ACME",
+          "out": "ACME"
+        },
+        "approvalNotes": null,
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      },
+      {
+        "category": "SHIRT",
+        "mpAttributeName": "external_product_id",
+        "canonicalAttributeId": "gtin",
+        "transformRule": null,
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "conditional",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": null,
+          "valueList": null
+        },
+        "example": {
+          "in": "4901234567890",
+          "out": "4901234567890"
+        },
+        "approvalNotes": null,
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      },
+      {
+        "category": "SHIRT",
+        "mpAttributeName": "size_name",
+        "canonicalAttributeId": "size",
+        "transformRule": "lookup(sizeSynonyms)",
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "false",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": null,
+          "valueList": null
+        },
+        "example": {
+          "in": "M",
+          "out": "M"
+        },
+        "approvalNotes": null,
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      }
+    ],
+    "Shopify": [
+      {
+        "category": "product",
+        "mpAttributeName": "title",
+        "canonicalAttributeId": "title",
+        "transformRule": "truncate(255)",
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "true",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": "1-255",
+          "valueList": null
+        },
+        "example": {
+          "in": "Acme Tee",
+          "out": "Acme Tee"
+        },
+        "approvalNotes": null,
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      },
+      {
+        "category": "product",
+        "mpAttributeName": "vendor",
+        "canonicalAttributeId": "brand",
+        "transformRule": null,
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "true",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": null,
+          "valueList": null
+        },
+        "example": {
+          "in": "ACME",
+          "out": "ACME"
+        },
+        "approvalNotes": null,
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      },
+      {
+        "category": "product",
+        "mpAttributeName": "body_html",
+        "canonicalAttributeId": "description",
+        "transformRule": "truncate(5000)",
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "false",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": "<=5000",
+          "valueList": null
+        },
+        "example": {
+          "in": "Great tee",
+          "out": "Great tee"
+        },
+        "approvalNotes": null,
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      },
+      {
+        "category": "variant",
+        "mpAttributeName": "option1",
+        "canonicalAttributeId": "size",
+        "transformRule": "lookup(sizeSynonyms)",
+        "regexRule": null,
+        "unitConversion": null,
+        "required": "false",
+        "constraints": {
+          "min": null,
+          "max": null,
+          "length": null,
+          "valueList": null
+        },
+        "example": {
+          "in": "M",
+          "out": "M"
+        },
+        "approvalNotes": null,
+        "lastVerifiedAt": null,
+        "sourceURL": null
+      }
+    ]
+  },
+  "exportedAt": "2025-10-23T07:54:06.493404Z"
+}

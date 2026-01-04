@@ -1,0 +1,135 @@
+{
+  "attributes": [
+    {
+      "name": "code",
+      "required": true,
+      "dataType": "string",
+      "maxLength": 50,
+      "description": "商品コード（必須）"
+    },
+    {
+      "name": "name",
+      "required": true,
+      "dataType": "string",
+      "maxLength": 200,
+      "description": "商品名（必須）"
+    },
+    {
+      "name": "price",
+      "required": true,
+      "dataType": "integer",
+      "description": "価格（必須、税込）"
+    },
+    {
+      "name": "url",
+      "required": true,
+      "dataType": "string",
+      "maxLength": 512,
+      "description": "商品URL（必須）"
+    },
+    {
+      "name": "image",
+      "required": false,
+      "dataType": "string",
+      "maxLength": 512,
+      "description": "商品画像URL"
+    },
+    {
+      "name": "description",
+      "required": false,
+      "dataType": "string",
+      "maxLength": 10000,
+      "description": "商品説明"
+    },
+    {
+      "name": "category_id",
+      "required": false,
+      "dataType": "string",
+      "description": "カテゴリID（階層構造、例：13457/2494/1729/23699）",
+      "reference": {
+        "type": "category_master",
+        "source": "Yahoo Shopping API カテゴリID取得API",
+        "note": "カテゴリマスターAPIから最新のカテゴリ一覧を取得可能。階層構造を持つ（親カテゴリID/子カテゴリIDの形式）。カテゴリIDはYahooショッピングのカテゴリページURLからも確認可能（例：https://shopping.yahoo.co.jp/category/13457/2494/1729/23699/）"
+      }
+    },
+    {
+      "name": "brand",
+      "required": false,
+      "dataType": "string",
+      "maxLength": 100,
+      "description": "ブランド名"
+    },
+    {
+      "name": "jan",
+      "required": false,
+      "dataType": "string",
+      "maxLength": 13,
+      "description": "JANコード"
+    },
+    {
+      "name": "isbn",
+      "required": false,
+      "dataType": "string",
+      "maxLength": 13,
+      "description": "ISBNコード"
+    },
+    {
+      "name": "condition",
+      "required": false,
+      "dataType": "string",
+      "description": "商品状態（新品、中古等）"
+    },
+    {
+      "name": "delivery",
+      "required": false,
+      "dataType": "string",
+      "description": "配送方法"
+    },
+    {
+      "name": "delivery_cost",
+      "required": false,
+      "dataType": "integer",
+      "description": "送料"
+    },
+    {
+      "name": "delivery_time",
+      "required": false,
+      "dataType": "string",
+      "description": "配送日数"
+    },
+    {
+      "name": "stock",
+      "required": false,
+      "dataType": "integer",
+      "description": "在庫数"
+    },
+    {
+      "name": "sale_start",
+      "required": false,
+      "dataType": "datetime",
+      "description": "販売開始日時"
+    },
+    {
+      "name": "sale_end",
+      "required": false,
+      "dataType": "datetime",
+      "description": "販売終了日時"
+    },
+    {
+      "name": "tax_include",
+      "required": false,
+      "dataType": "boolean",
+      "description": "税込価格かどうか"
+    },
+    {
+      "name": "point_rate",
+      "required": false,
+      "dataType": "decimal",
+      "description": "ポイント還元率"
+    }
+  ],
+  "extractedAt": "2025-11-07T03:45:31.260715",
+  "source": "yahoo_shopping_api_csv_spec",
+  "version": "2025-11-07",
+  "sourceURL": "https://developer.yahoo.co.jp/webapi/shopping/uploadItemFile.html"
+}

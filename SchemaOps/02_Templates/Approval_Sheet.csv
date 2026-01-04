@@ -1,0 +1,2 @@
+proposalId,targetSheet,changeType,changeDetails,proposer,proposedAt,reviewer,status,reviewedAt,reviewNotes,appliedAt
+PROP-20251023181640,Canonical_Schema,add,"{""attributeId"": ""size"", ""attributeName_ja"": ""サイズ"", ""attributeName_en"": ""Size"", ""definition"": ""Product size specification"", ""dataType"": ""string"", ""allowedValues"": ""S;M;L;XL;XXL"", ""requiredFlag"": true}",ops_team,2025-10-23T18:16:40.719475,lead_reviewer,approved,2025-10-23T18:16:40.719685,"Looks good, standard size values",2025-10-23T18:16:40.719829

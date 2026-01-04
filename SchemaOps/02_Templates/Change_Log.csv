@@ -1,0 +1,3 @@
+date,target,name,changeSummary,impactedAttributes,severity,SLA_hours,ETA,status,owner,lastVerifiedAt,docURL,sourceURL,notes
+2025-10-23,mp,GMC Spec,Title max length updated to 150,title,major,120,2025-10-31,new,ops,2025-10-23,,https://support.google.com/merchants/answer/7052112,
+2025-10-23,retailer,Yodobashi Vendor Spec,Added mandatory column `BrandCode`,brand,critical,72,2025-10-26,new,ops,2025-10-23,,https://example.com/yodobashi/spec.xlsx,

@@ -1,0 +1,9 @@
+taskId,task,owner,due,status,notes,evidenceURL
+TT-001,Review Sources_Registry and add 10 more sources,ops,2025-10-30,new,,
+TT-002,Configure GAS triggers and test critical notify,ops,2025-10-28,in-progress,,
+
+
+
+
+
+
