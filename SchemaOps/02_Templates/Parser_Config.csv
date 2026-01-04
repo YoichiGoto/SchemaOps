@@ -1,7 +1,0 @@
-parserProfile,docType,selectors_or_prompts,jsonSchemaURL,examplesURL,confidenceThreshold,fallbackRule
-gmc_html,html,"table tr td:first-child, .attribute-name","https://schema.org/Product","examples/gmc.json",0.85,manual_review
-amazon_text,text,"Attribute: .*Required:","https://schema.org/Product","examples/amazon.json",0.80,manual_review
-shopify_json,json,"$.product.fields[*]","https://schema.org/Product","examples/shopify.json",0.90,auto_approve
-gmc_support_attr_v1,html,"extract tables: attribute name, required, max length, allowed values; capture category notes",schema://canonical_attr_v1,,0.85,manual_review
-yahoo_dev_v1,html,"find product attribute sections; normalize bullet lists to key:value",schema://canonical_attr_v1,,0.85,manual_review
-shopify_csv_v1,html,"read CSV header spec and constraints; map to canonical fields",schema://canonical_attr_v1,,0.85,manual_review
