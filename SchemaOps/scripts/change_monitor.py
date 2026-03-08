@@ -16,16 +16,18 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class ChangeMonitor:
-    """Monitors schema changes from marketplace APIs."""
+    """Monitors schema changes from marketplace APIs and raw policy documents (TRAM Ingestion)."""
     
     def __init__(self, data_dir: Path):
         self.data_dir = data_dir
         self.data_dir.mkdir(exist_ok=True)
         self.schema_history_file = data_dir / "schema_history.json"
+        self.document_history_file = data_dir / "document_history.json"
         self.change_log_file = data_dir / "change_log.json"
         
         # Load existing data
         self.schema_history = self._load_json_file(self.schema_history_file, {})
+        self.document_history = self._load_json_file(self.document_history_file, {})
         self.change_log = self._load_json_file(self.change_log_file, [])
     
     def _load_json_file(self, file_path: Path, default_value):
@@ -122,11 +124,39 @@ class ChangeMonitor:
         
         return changes
     
+    def detect_document_changes(self, source_name: str, content_hash: str, source_url: str = "") -> List[Dict[str, Any]]:
+        """
+        Detect changes in raw policy/regulation documents (TRAM Ingestion).
+        When document hash changes, flags that determinations based on this source need review.
+        """
+        changes = []
+        current = self.document_history.get(source_name, {})
+        prev_hash = current.get("hash", "")
+        
+        if prev_hash and content_hash != prev_hash:
+            changes.append({
+                "type": "document_updated",
+                "attribute": source_name,
+                "details": {"prev_hash": prev_hash[:8], "new_hash": content_hash[:8], "source_url": source_url},
+                "severity": "major",
+                "determination_needs_review": True,
+            })
+            logger.info(f"Document change detected: {source_name}, determinations need review")
+        
+        self.document_history[source_name] = {
+            "hash": content_hash,
+            "source_url": source_url,
+            "lastUpdated": datetime.now().isoformat(),
+        }
+        self._save_json_file(self.document_history_file, self.document_history)
+        
+        return changes
+    
     def log_changes(self, mp_name: str, changes: List[Dict[str, Any]]):
         """Log detected changes to change log."""
         for change in changes:
             change_entry = {
-                "id": f"{mp_name}_{int(time.time())}_{hash(change['type'] + change['attribute'])}",
+                "id": f"{mp_name}_{int(time.time())}_{hash(change['type'] + str(change.get('attribute', '')))}",
                 "mp_name": mp_name,
                 "change_type": change["type"],
                 "attribute": change.get("attribute", ""),
@@ -135,9 +165,10 @@ class ChangeMonitor:
                 "detected_at": datetime.now().isoformat(),
                 "status": "new",
                 "sla_hours": self._get_sla_hours(change["severity"]),
-                "eta": (datetime.now() + timedelta(hours=self._get_sla_hours(change["severity"]))).isoformat()
+                "eta": (datetime.now() + timedelta(hours=self._get_sla_hours(change["severity"]))).isoformat(),
             }
-            
+            if change.get("determination_needs_review"):
+                change_entry["determination_needs_review"] = True
             self.change_log.append(change_entry)
         
         # Save updated change log
@@ -171,6 +202,13 @@ class ChangeMonitor:
                     overdue.append(change)
         
         return overdue
+    
+    def get_determination_review_alerts(self) -> List[Dict[str, Any]]:
+        """Get changes that flag determinations as needing review (document_updated)."""
+        return [
+            c for c in self.change_log
+            if c.get("determination_needs_review") and c.get("status") == "new"
+        ]
     
     def update_change_status(self, change_id: str, status: str, notes: str = ""):
         """Update the status of a change."""

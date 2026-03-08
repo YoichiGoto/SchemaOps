@@ -4,6 +4,7 @@
 ## 目的・範囲
 
 - 目的: ブランドのカタログデータが無くても、マーケットプレイスの公開仕様に基づき「共通スキーマ→MPマッピング→属性辞書→検証ルール→変更追従」を資産化。API未提供MPでも自動巡回・抽出・反映を高効率化。
+- 参考: [GetSphere TRAM ワークフロー](01_SOP/GetSphere_TRAM_Workflow_Reference.md) — 税務コンプライアンス領域の AI ネイティブワークフローをマーケットプレイス・コンプライアンス向けにマッピングした参照。
 - 初期スコープ（MP/カテゴリ）:
 - MP: Google Merchant Center, Amazon, Shopify,（運用対象として）Rakuten, Yahoo Shopping, Mirakl, Mercari Shops
 - カテゴリ: アパレル/スポーツ上位（サイズ・色・素材・バリエーション・画像要件中心）
